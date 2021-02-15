@@ -94,6 +94,41 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
           "emoji": true
         },
         "blocks": [
+          		{
+                "block_id": "select_block",
+        "type": "actions",
+        "elements": [
+            {
+
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "Coffee or Tea"
+              },
+              "accessory": {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "☕️",
+                      "emoji": true
+                    },
+                    "value": "☕️"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🍵",
+                      "emoji": true
+                    },
+                    "value": "🍵"
+                  },
+                ],
+                "action_id": "radio_buttons-action"
+              }
+            },
+        },
           {
             "block_id": "intro_block",
             "type": "input",
@@ -210,7 +245,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
       // Channel to send message to
       channel: channel_id,
       // text: '測試中'
-      text: '<b>Introduction: </b>' + intro + '\n\n' + '<b>Interest: </b>' + interest + '\n\n' + '<b>Fun Fact: </b>' + funFact + '\n\n' + '<b>Social Media: </b>' + socialMedia + '\n\n',
+      text: '*Introduction:* ' + intro + '\n\n' + '*Interest: *' + interest + '\n\n' + '*Fun Fact: *' + funFact + '\n\n' + '*Social Media: *' + socialMedia + '\n\n',
     });
   }
   catch (error) {
