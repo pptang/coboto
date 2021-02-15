@@ -190,6 +190,11 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   const val = view['state']['values']['photo_url'];
   const user = body['user']['id'];
   const channel_id = view['state']['values']['my_block_id']['my_action_id']['selected_conversation'];
+  const intro = view['state']['values']['intro'];
+  const funFact = view['state']['values']['fun_fact'];
+  const interest = view['state']['values']['interest'];
+  const socialMedia = view['state']['values']['social_media'];
+  console.log(view['state']['values'])
   // console.log(view['state']['values']['my_block_id']['my_action_id'])
   // You'll probably want to store these values somewhere
   // console.log(body.tea);
@@ -200,7 +205,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
       token: context.botToken,
       // Channel to send message to
       channel: channel_id,
-      text: 'hello fdsfsdfdsfsdfs'
+      text: 'Introduction: ' + intro + '\n\n' + 'Interest: ' + interest + '\n\n' + 'Fun Fact: ' + funFact + '\n\n' + 'Social Media: ' + socialMedia + '\n\n',
     });
   }
   catch (error) {
