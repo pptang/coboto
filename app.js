@@ -172,23 +172,23 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
 
   // Assume there's an input block with `test_input` as the block_id and `dreamy_input` as the action_id
-  const val = view['state']['values'];
-  // const user = body['user']['id'];
+  const val = view['state']['values']['photo_url'];
+  const user = body['user']['id'];
   
   // You'll probably want to store these values somewhere
-  console.log(view);
+  // console.log(body.tea);
   // console.log(user);
   // Message the user
-  // try {
-  //   await app.client.chat.postMessage({
-  //     // Channel to send message to
-  //     channel: view.payload.channel_id,
-  //     text: val
-  //   });
-  // }
-  // catch (error) {
-  //   console.error(error);
-  // }
+  try {
+    await app.client.chat.postMessage({
+      // Channel to send message to
+      channel: user,
+      text: val
+    });
+  }
+  catch (error) {
+    console.error(error);
+  }
 });
 
 
