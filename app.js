@@ -154,7 +154,22 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
               "text": "📷Upload a photo to express your self",
               "emoji": true
             }
-          }
+          },
+          {
+            "block_id": "my_block_id",
+            "type": "input",
+            "optional": true,
+            "label": {
+              "type": "plain_text",
+              "text": "Select a channel to post the result on",
+            },
+            "element": {
+              "action_id": "my_action_id",
+              "type": "conversations_select",
+              "default_to_current_conversation": true,
+              "response_url_enabled": true,
+            },
+          },
         ]
       }
     });
@@ -174,7 +189,8 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // Assume there's an input block with `test_input` as the block_id and `dreamy_input` as the action_id
   const val = view['state']['values']['photo_url'];
   const user = body['user']['id'];
-  console.log({body, view,context})
+  const channel_id = view['state']['values']['my_block_id']['my_action_id']['selected_conversation'];
+  // console.log(view['state']['values']['my_block_id']['my_action_id'])
   // You'll probably want to store these values somewhere
   // console.log(body.tea);
   // console.log(user);
@@ -183,8 +199,8 @@ app.view('view_1', async ({ ack, body, view, context }) => {
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
-      channel: user,
-      text: 'hello workld'
+      channel: channel_id,
+      text: 'hello fdsfsdfdsfsdfs'
     });
   }
   catch (error) {
