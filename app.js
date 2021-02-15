@@ -62,6 +62,7 @@ app.event('app_home_opened', async ({ event, client, context }) => {
   }
 });
 
+
 // Listen for a slash command invocation
 app.command('/pechakucha', async ({ ack, payload, context }) => {
   // Acknowledge the command request
@@ -166,7 +167,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
 
 app.view('view_1', async ({ ack, body, view, context }) => {
   // Acknowledge the view_submission event
-  await ack();
+  ack();
   
   // Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
 
@@ -175,19 +176,19 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // const user = body['user']['id'];
   
   // You'll probably want to store these values somewhere
-  console.log(val);
+  console.log(view);
   // console.log(user);
   // Message the user
-  try {
-    await app.client.chat.postMessage({
-      // Channel to send message to
-      channel: payload.channel_id,
-      text: val
-    });
-  }
-  catch (error) {
-    console.error(error);
-  }
+  // try {
+  //   await app.client.chat.postMessage({
+  //     // Channel to send message to
+  //     channel: view.payload.channel_id,
+  //     text: val
+  //   });
+  // }
+  // catch (error) {
+  //   console.error(error);
+  // }
 });
 
 
