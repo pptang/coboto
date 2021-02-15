@@ -9,7 +9,95 @@ const app = new App({
 
 
 // All the room in the world for your code
+app.event('app_home_opened', async ({ event, client, context }) => {
+  try {
+    /* view.publish is the method that your app uses to push a view to the Home tab */
+    const result = await client.views.publish({
 
+      /* the user that opened your app's app home */
+      user_id: event.user,
+
+      /* the view object that appears in the app home*/
+      view: {
+        type: 'home',
+        callback_id: 'home_view',
+
+        /* body of the view */
+        blocks: [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Welcome to your _App's Home_* :tada:"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "This button won't do much for now but you can set up a listener for it using the `actions()` method and passing its unique `action_id`. See an example in the `examples` folder within your Bolt app."
+            }
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "button",
+                "text": {
+                  "type": "plain_text",
+                  "text": "Click me!"
+                }
+              }
+            ]
+          }
+        ]
+      }
+    });
+  }
+  catch (error) {
+    console.error(error);
+  }
+});
+
+app.command('/pechakucha', async ({ ack, payload, context }) => {
+  // Acknowledge the command request
+  ack();
+
+  try {
+    const result = await app.client.chat.postMessage({
+      token: context.botToken,
+      // Channel to send message to
+      channel: payload.channel_id,
+      // Include a button in the message (or whatever blocks you want!)
+      blocks: [
+        {
+          type: 'section',
+          text: {
+            type: 'mrkdwn',
+            text: 'Go ahead. Click it.'
+          },
+          accessory: {
+            type: 'button',
+            text: {
+              type: 'plain_text',
+              text: 'Click me!'
+            },
+            action_id: 'button_abc'
+          }
+        }
+      ],
+      // Text in the notification
+      text: 'Message from Test App'
+    });
+    console.log(result);
+  }
+  catch (error) {
+    console.error(error);
+  }
+});
 
 
 (async () => {
