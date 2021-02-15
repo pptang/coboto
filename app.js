@@ -95,6 +95,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
         },
         "blocks": [
           {
+            "block_id": "intro_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -108,6 +109,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "interest_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -120,6 +122,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "socialMedia_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -132,6 +135,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "funFact_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -144,6 +148,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "photoUrl_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -187,13 +192,12 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
 
   // Assume there's an input block with `test_input` as the block_id and `dreamy_input` as the action_id
-  const val = view['state']['values']['photo_url'];
-  const user = body['user']['id'];
+
   const channel_id = view['state']['values']['my_block_id']['my_action_id']['selected_conversation'];
-  const intro = view['state']['values']['intro'];
-  const funFact = view['state']['values']['fun_fact'];
-  const interest = view['state']['values']['interest'];
-  const socialMedia = view['state']['values']['social_media'];
+  const intro = view['state']['values']['intro_block']['intro']['value'];
+  const funFact = view['state']['values']['funFact_block']['fun_fact']['value'];
+  const interest = view['state']['values']['interest_block']['interest']['value'];
+  const socialMedia = view['state']['values']['socialMedia_block']['social_media']['value'];
   console.log(view['state']['values'])
   // console.log(view['state']['values']['my_block_id']['my_action_id'])
   // You'll probably want to store these values somewhere
@@ -205,7 +209,8 @@ app.view('view_1', async ({ ack, body, view, context }) => {
       token: context.botToken,
       // Channel to send message to
       channel: channel_id,
-      text: 'Introduction: ' + intro + '\n\n' + 'Interest: ' + interest + '\n\n' + 'Fun Fact: ' + funFact + '\n\n' + 'Social Media: ' + socialMedia + '\n\n',
+      // text: '測試中'
+      text: '<b>Introduction: </b>' + intro + '\n\n' + '<b>Interest: </b>' + interest + '\n\n' + '<b>Fun Fact: </b>' + funFact + '\n\n' + '<b>Social Media: </b>' + socialMedia + '\n\n',
     });
   }
   catch (error) {
