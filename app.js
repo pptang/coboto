@@ -98,7 +98,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "element": {
               "type": "plain_text_input",
               "multiline": true,
-              "action_id": "plain_text_input-action"
+              "action_id": "intro"
             },
             "label": {
               "type": "plain_text",
@@ -110,7 +110,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "input",
             "element": {
               "type": "plain_text_input",
-              "action_id": "plain_text_input-action"
+              "action_id": "interest"
             },
             "label": {
               "type": "plain_text",
@@ -122,7 +122,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "input",
             "element": {
               "type": "plain_text_input",
-              "action_id": "plain_text_input-action"
+              "action_id": "social_media"
             },
             "label": {
               "type": "plain_text",
@@ -157,26 +157,37 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
         ]
       }
     });
-    console.log(result);
+    // console.log(result);
   }
   catch (error) {
     console.error(error);
   }
 });
 
-app.view('view_1', ({ ack, body, view, context }) => {
+app.view('view_1', async ({ ack, body, view, context }) => {
   // Acknowledge the view_submission event
-  ack();
+  await ack();
   
   // Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
 
   // Assume there's an input block with `test_input` as the block_id and `dreamy_input` as the action_id
-  const val = view['state']['values']['test_input']['dreamy_input'];
-  const user = body['user']['id'];
+  const val = view['state']['values'];
+  // const user = body['user']['id'];
   
   // You'll probably want to store these values somewhere
   console.log(val);
-  console.log(user);
+  // console.log(user);
+  // Message the user
+  try {
+    await app.client.chat.postMessage({
+      // Channel to send message to
+      channel: payload.channel_id,
+      text: val
+    });
+  }
+  catch (error) {
+    console.error(error);
+  }
 });
 
 
