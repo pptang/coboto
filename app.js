@@ -74,47 +74,87 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
       trigger_id: payload.trigger_id,
       // View payload
       view: {
-        type: 'modal',
+        "type": "modal",
         // View identifier
         callback_id: 'view_1',
-        title: {
-          type: 'plain_text',
-          text: 'Modal title'
+        "title": {
+          "type": "plain_text",
+          "text": "Pecha Kucha",
+          "emoji": true
         },
-        blocks: [
+        "submit": {
+          "type": "plain_text",
+          "text": "Send",
+          "emoji": true,
+        },
+        "close": {
+          "type": "plain_text",
+          "text": "Cancel",
+          "emoji": true
+        },
+        "blocks": [
           {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: 'Welcome to a modal with _blocks_'
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "multiline": true,
+              "action_id": "plain_text_input-action"
             },
-            accessory: {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: 'Click me!'
-              },
-              action_id: 'button_abc'
+            "label": {
+              "type": "plain_text",
+              "text": "🖋Tell your teammate about you!",
+              "emoji": true
             }
           },
           {
-            type: 'input',
-            block_id: 'test_input',
-            label: {
-              type: 'plain_text',
-              text: 'What are your hopes and dreams?'
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "plain_text_input-action"
             },
-            element: {
-              type: 'plain_text_input',
-              action_id: 'dreamy_input',
-              multiline: true
+            "label": {
+              "type": "plain_text",
+              "text": "❣️Your interest: Favorite 📺Movie, 🎶Music, 🏂Sport, 🎮Game",
+              "emoji": true
+            }
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "plain_text_input-action"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "🕹Social Media: Facebook, Instagram, witter, Note...etc.",
+              "emoji": true
+            }
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "fun_fact"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "😅Fun Fact",
+              "emoji": true
+            }
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "photo_url"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "📷Upload a photo to express your self",
+              "emoji": true
             }
           }
-        ],
-        submit: {
-          type: 'plain_text',
-          text: 'Submit'
-        }
+        ]
       }
     });
     console.log(result);
@@ -122,6 +162,21 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
   catch (error) {
     console.error(error);
   }
+});
+
+app.view('view_1', ({ ack, body, view, context }) => {
+  // Acknowledge the view_submission event
+  ack();
+  
+  // Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
+
+  // Assume there's an input block with `test_input` as the block_id and `dreamy_input` as the action_id
+  const val = view['state']['values']['test_input']['dreamy_input'];
+  const user = body['user']['id'];
+  
+  // You'll probably want to store these values somewhere
+  console.log(val);
+  console.log(user);
 });
 
 
