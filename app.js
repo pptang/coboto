@@ -174,7 +174,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // Assume there's an input block with `test_input` as the block_id and `dreamy_input` as the action_id
   const val = view['state']['values']['photo_url'];
   const user = body['user']['id'];
-  
+  console.log({body, view,context})
   // You'll probably want to store these values somewhere
   // console.log(body.tea);
   // console.log(user);
