@@ -94,41 +94,38 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
           "emoji": true
         },
         "blocks": [
-          		{
-                "block_id": "select_block",
-        "type": "actions",
-        "elements": [
-            {
-
-              "type": "section",
-              "text": {
-                "type": "mrkdwn",
-                "text": "Coffee or Tea"
-              },
-              "accessory": {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "☕️",
-                      "emoji": true
-                    },
-                    "value": "☕️"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🍵",
-                      "emoji": true
-                    },
-                    "value": "🍵"
-                  },
-                ],
-                "action_id": "radio_buttons-action"
-              }
+          {
+            "block_id": "select_block",          
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Coffee or Tea*"
             },
-        },
+            "accessory": {
+              "type": "radio_buttons",
+              "options": [
+                {
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Coffee",
+                    "emoji": true
+                  },
+                  "value": "Coffee"
+                },
+                {
+                  "text": {
+                    "type": "plain_text",
+                    "text": "Tea",
+                    "emoji": true
+                  },
+                  "value": "Tea"
+                },
+              ],
+              "action_id": "radio_buttons-action"
+            }
+          
+              
+          },
           {
             "block_id": "intro_block",
             "type": "input",
@@ -233,7 +230,8 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   const funFact = view['state']['values']['funFact_block']['fun_fact']['value'];
   const interest = view['state']['values']['interest_block']['interest']['value'];
   const socialMedia = view['state']['values']['socialMedia_block']['social_media']['value'];
-  console.log(view['state']['values'])
+  const selectOption = view['state']['values']['select_block']['radio_buttons-action']['selected_option']['value'];
+  console.log(view['state']['values']['select_block'])
   // console.log(view['state']['values']['my_block_id']['my_action_id'])
   // You'll probably want to store these values somewhere
   // console.log(body.tea);
@@ -245,7 +243,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
       // Channel to send message to
       channel: channel_id,
       // text: '測試中'
-      text: '*Introduction:* ' + intro + '\n\n' + '*Interest: *' + interest + '\n\n' + '*Fun Fact: *' + funFact + '\n\n' + '*Social Media: *' + socialMedia + '\n\n',
+      text: '*Coffee or Tea:* ' + selectOption + '\n\n' + '*Introduction:* ' + intro + '\n\n' + '*Interest:* ' + interest + '\n\n' + '*Fun Fact:* ' + funFact + '\n\n' + '*Social Media:* ' + socialMedia + '\n\n',
     });
   }
   catch (error) {
