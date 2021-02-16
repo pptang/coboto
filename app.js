@@ -235,7 +235,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
 
   // Message the user
   try {
-    const res = await fetch('http://localhost:3000/generate-ikigai', {
+    const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-ikigai', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -244,8 +244,10 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         data: 'test'
       })
     })
-    const imgUrl = res.json();
-    console.log(imgUrl)
+
+    const data = await res.json();
+    
+    const path = data.imgUrl.split('/')[3]
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
@@ -306,7 +308,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         },
         {
           "type": "image",
-          "image_url": photoUrl,
+          "image_url": 'https://pecha-kucha-mashi-mashi.herokuapp.com/' + path,
           // "image_url": "https://i1.wp.com/thetempest.co/wp-content/uploads/2017/08/The-wise-words-of-Michael-Scott-Imgur-2.jpg?w=1024&ssl=1",
           "alt_text": "inspiration"
         }
