@@ -260,35 +260,42 @@ app.view('view_1', async ({ ack, body, view, context }) => {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*Introduction:*" + intro
+            "text": "*Coffee or Tea:* " + selectOption
           }
         },
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*Interest:*" + interest
+            "text": "*Introduction:* " + intro
           }
         },
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*Fun Fact:*" + funFact
+            "text": "*Interest:* " + interest
           }
         },
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*Social Media:*" + socialMedia
+            "text": "*Fun Fact:* " + funFact
           }
         },
         {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*A photo of me:*"
+            "text": "*Social Media:* " + socialMedia
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*A photo of me:* "
           }
         },
         {
