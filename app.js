@@ -467,7 +467,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
     const data = await res.json();
     
     const imgUrl = data.imgUrl;
-    console.log(data.imgUrl);
+    
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
@@ -528,8 +528,8 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         // },
         {
           "type": "image",
-          // "image_url": imgUrl,
-          "image_url": "https://i1.wp.com/thetempest.co/wp-content/uploads/2017/08/The-wise-words-of-Michael-Scott-Imgur-2.jpg?w=1024&ssl=1",
+          "image_url": imgUrl,
+          // "image_url": "https://i1.wp.com/thetempest.co/wp-content/uploads/2017/08/The-wise-words-of-Michael-Scott-Imgur-2.jpg?w=1024&ssl=1",
           "alt_text": "inspiration"
         }
       ]
