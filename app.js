@@ -1,5 +1,6 @@
 // Require the Bolt package (github.com/slackapi/bolt)
 const { App } = require("@slack/bolt");
+const fetch = require('node-fetch');
 
 const app = new App({
   token: process.env.SLACK_BOT_TOKEN,
@@ -64,7 +65,7 @@ app.event('app_home_opened', async ({ event, client, context }) => {
 
 
 // Listen for a slash command invocation
-app.command('/test', async ({ ack, payload, context }) => {
+app.command('/pechakucha', async ({ ack, payload, context }) => {
   // Acknowledge the command request
   ack();
 
@@ -234,6 +235,17 @@ app.view('view_1', async ({ ack, body, view, context }) => {
 
   // Message the user
   try {
+    const res = await fetch('http://localhost:3000/generate-ikigai', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        data: 'test'
+      })
+    })
+    const imgUrl = res.json();
+    console.log(imgUrl)
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
