@@ -75,141 +75,141 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
       // Pass a valid trigger_id within 3 seconds of receiving it
       trigger_id: payload.trigger_id,
       // View payload
-      view: {
-        "type": "modal",
-        // View identifier
-        callback_id: 'view_1',
-        "title": {
-          "type": "plain_text",
-          "text": "Pecha Kucha",
-          "emoji": true
-        },
-        "submit": {
-          "type": "plain_text",
-          "text": "Send",
-          "emoji": true,
-        },
-        "close": {
-          "type": "plain_text",
-          "text": "Cancel",
-          "emoji": true
-        },
-        "blocks": [
-          {
-            "block_id": "select_block",          
-            "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": "*Coffee or Tea*"
-            },
-            "accessory": {
-              "type": "radio_buttons",
-              "options": [
-                {
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Coffee",
-                    "emoji": true
-                  },
-                  "value": "Coffee"
-                },
-                {
-                  "text": {
-                    "type": "plain_text",
-                    "text": "Tea",
-                    "emoji": true
-                  },
-                  "value": "Tea"
-                },
-              ],
-              "action_id": "radio_buttons-action"
-            }
+//       view: {
+//         "type": "modal",
+//         // View identifier
+//         callback_id: 'view_1',
+//         "title": {
+//           "type": "plain_text",
+//           "text": "Pecha Kucha",
+//           "emoji": true
+//         },
+//         "submit": {
+//           "type": "plain_text",
+//           "text": "Send",
+//           "emoji": true,
+//         },
+//         "close": {
+//           "type": "plain_text",
+//           "text": "Cancel",
+//           "emoji": true
+//         },
+//         "blocks": [
+//           {
+//             "block_id": "select_block",          
+//             "type": "section",
+//             "text": {
+//               "type": "mrkdwn",
+//               "text": "*Coffee or Tea*"
+//             },
+//             "accessory": {
+//               "type": "radio_buttons",
+//               "options": [
+//                 {
+//                   "text": {
+//                     "type": "plain_text",
+//                     "text": "Coffee",
+//                     "emoji": true
+//                   },
+//                   "value": "Coffee"
+//                 },
+//                 {
+//                   "text": {
+//                     "type": "plain_text",
+//                     "text": "Tea",
+//                     "emoji": true
+//                   },
+//                   "value": "Tea"
+//                 },
+//               ],
+//               "action_id": "radio_buttons-action"
+//             }
           
               
-          },
-          {
-            "block_id": "intro_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "multiline": true,
-              "action_id": "intro"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "🖋Tell your teammate about you!",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "interest_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "interest"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "❣️Your interest: Favorite 📺Movie, 🎶Music, 🏂Sport, 🎮Game",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "socialMedia_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "social_media"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "🕹Social Media: Facebook, Instagram, witter, Note...etc.",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "funFact_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "fun_fact"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "😅Fun Fact",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "photoUrl_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "photo_url"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "📷Upload a photo to express your self",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "my_block_id",
-            "type": "input",
-            "optional": true,
-            "label": {
-              "type": "plain_text",
-              "text": "Select a channel to post the result on",
-            },
-            "element": {
-              "action_id": "my_action_id",
-              "type": "conversations_select",
-              "default_to_current_conversation": true,
-              "response_url_enabled": true,
-            },
-          },
-        ]
-      }
+//           },
+//           {
+//             "block_id": "intro_block",
+//             "type": "input",
+//             "element": {
+//               "type": "plain_text_input",
+//               "multiline": true,
+//               "action_id": "intro"
+//             },
+//             "label": {
+//               "type": "plain_text",
+//               "text": "🖋Tell your teammate about you!",
+//               "emoji": true
+//             }
+//           },
+//           {
+//             "block_id": "interest_block",
+//             "type": "input",
+//             "element": {
+//               "type": "plain_text_input",
+//               "action_id": "interest"
+//             },
+//             "label": {
+//               "type": "plain_text",
+//               "text": "❣️Your interest: Favorite 📺Movie, 🎶Music, 🏂Sport, 🎮Game",
+//               "emoji": true
+//             }
+//           },
+//           {
+//             "block_id": "socialMedia_block",
+//             "type": "input",
+//             "element": {
+//               "type": "plain_text_input",
+//               "action_id": "social_media"
+//             },
+//             "label": {
+//               "type": "plain_text",
+//               "text": "🕹Social Media: Facebook, Instagram, witter, Note...etc.",
+//               "emoji": true
+//             }
+//           },
+//           {
+//             "block_id": "funFact_block",
+//             "type": "input",
+//             "element": {
+//               "type": "plain_text_input",
+//               "action_id": "fun_fact"
+//             },
+//             "label": {
+//               "type": "plain_text",
+//               "text": "😅Fun Fact",
+//               "emoji": true
+//             }
+//           },
+//           {
+//             "block_id": "photoUrl_block",
+//             "type": "input",
+//             "element": {
+//               "type": "plain_text_input",
+//               "action_id": "photo_url"
+//             },
+//             "label": {
+//               "type": "plain_text",
+//               "text": "📷Upload a photo to express your self",
+//               "emoji": true
+//             }
+//           },
+//           {
+//             "block_id": "my_block_id",
+//             "type": "input",
+//             "optional": true,
+//             "label": {
+//               "type": "plain_text",
+//               "text": "Select a channel to post the result on",
+//             },
+//             "element": {
+//               "action_id": "my_action_id",
+//               "type": "conversations_select",
+//               "default_to_current_conversation": true,
+//               "response_url_enabled": true,
+//             },
+//           },
+//         ]
+//       }
     });
   }
   catch (error) {
