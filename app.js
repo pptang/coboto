@@ -231,6 +231,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   const interest = view['state']['values']['interest_block']['interest']['value'];
   const socialMedia = view['state']['values']['socialMedia_block']['social_media']['value'];
   const selectOption = view['state']['values']['select_block']['radio_buttons-action']['selected_option']['value'];
+  const photoUrl = view['state']['values']['photoUrl_block']['photo_url']['value'];
   console.log(view['state']['values']['select_block'])
   // console.log(view['state']['values']['my_block_id']['my_action_id'])
   // You'll probably want to store these values somewhere
@@ -243,7 +244,60 @@ app.view('view_1', async ({ ack, body, view, context }) => {
       // Channel to send message to
       channel: channel_id,
       // text: '測試中'
-      text: '*Coffee or Tea:* ' + selectOption + '\n\n' + '*Introduction:* ' + intro + '\n\n' + '*Interest:* ' + interest + '\n\n' + '*Fun Fact:* ' + funFact + '\n\n' + '*Social Media:* ' + socialMedia + '\n\n',
+      // text: '*Coffee or Tea:* ' + selectOption + '\n\n' + '*Introduction:* ' + intro + '\n\n' + '*Interest:* ' + interest + '\n\n' + '*Fun Fact:* ' + funFact + '\n\n' + '*Social Media:* ' + socialMedia + '\n\n',
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "Hello, Check this out 👀"
+          }
+        },
+        {
+          "type": "divider"
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Introduction:*" + intro
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Interest:*" + interest
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Fun Fact:*" + funFact
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Social Media:*" + socialMedia
+          }
+        },
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*A photo of me:*"
+          }
+        },
+        {
+          "type": "image",
+          "image_url": photoUrl,
+          // "image_url": "https://i1.wp.com/thetempest.co/wp-content/uploads/2017/08/The-wise-words-of-Michael-Scott-Imgur-2.jpg?w=1024&ssl=1",
+          "alt_text": "inspiration"
+        }
+      ]
     });
   }
   catch (error) {
