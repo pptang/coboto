@@ -64,7 +64,7 @@ app.event('app_home_opened', async ({ event, client, context }) => {
 
 
 // Listen for a slash command invocation
-app.command('/pechakucha', async ({ ack, payload, context }) => {
+app.command('/test', async ({ ack, payload, context }) => {
   // Acknowledge the command request
   ack();
 
@@ -210,7 +210,6 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
         ]
       }
     });
-    // console.log(result);
   }
   catch (error) {
     console.error(error);
@@ -232,18 +231,13 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   const socialMedia = view['state']['values']['socialMedia_block']['social_media']['value'];
   const selectOption = view['state']['values']['select_block']['radio_buttons-action']['selected_option']['value'];
   const photoUrl = view['state']['values']['photoUrl_block']['photo_url']['value'];
-  console.log(view['state']['values']['select_block'])
-  // console.log(view['state']['values']['my_block_id']['my_action_id'])
-  // You'll probably want to store these values somewhere
-  // console.log(body.tea);
-  // console.log(user);
+
   // Message the user
   try {
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
       channel: channel_id,
-      // text: '測試中'
       // text: '*Coffee or Tea:* ' + selectOption + '\n\n' + '*Introduction:* ' + intro + '\n\n' + '*Interest:* ' + interest + '\n\n' + '*Fun Fact:* ' + funFact + '\n\n' + '*Social Media:* ' + socialMedia + '\n\n',
       "blocks": [
         {
