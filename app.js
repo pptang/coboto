@@ -117,6 +117,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "divider"
           },
           {
+            "block_id": "love_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -129,6 +130,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "happy_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -154,6 +156,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "divider"
           },
           {
+            "block_id": "skill_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -166,6 +169,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "help_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -191,6 +195,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "divider"
           },
           {
+            "block_id": "inspire_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -203,6 +208,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "angry_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -228,6 +234,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "divider"
           },
           {
+            "block_id": "sell_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -240,6 +247,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "job_block",
             "type": "input",
             "element": {
               "type": "plain_text_input",
@@ -252,7 +260,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
-            // "block_id": "my_block_id",
+            "block_id": "channel_block",
             "type": "input",
             "optional": true,
             "label": {
@@ -417,8 +425,8 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
 
   // Assume there's an input block with `test_input` as the block_id and `dreamy_input` as the action_id
-  console.log('test')
-  const channel_id = view['state']['values']['channel']['selected_conversation'];
+  // console.log('test')
+  // const channel_id = view['state']['values']['channel']['selected_conversation'];
   
   // const intro = view['state']['values']['intro_block']['intro']['value'];
   // const funFact = view['state']['values']['funFact_block']['fun_fact']['value'];
@@ -426,8 +434,17 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // const socialMedia = view['state']['values']['socialMedia_block']['social_media']['value'];
   // const selectOption = view['state']['values']['select_block']['radio_buttons-action']['selected_option']['value'];
   // const photoUrl = view['state']['values']['photoUrl_block']['photo_url']['value'];
-  const values = view['state']['values'];
-  console.log(values);
+  const love = view['state']['values']['love_block']['love']['value'];
+  const happy = view['state']['values']['happy_block']['happy']['value'];
+  const skill = view['state']['values']['skill_block']['skill']['value'];
+  const help = view['state']['values']['help_block']['help']['value'];
+  const inspire = view['state']['values']['inspire_block']['inspire']['value'];
+  const angry = view['state']['values']['angry_block']['angry']['value'];
+  const sell = view['state']['values']['sell_block']['sell']['value'];
+  const job = view['state']['values']['job_block']['job']['value'];
+  const channel = view['state']['values']['channel_block']['channel']['selected_conversation'];
+  
+  
   // Message the user
   try {
     const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-ikigai', {
@@ -436,7 +453,11 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        data: 'test'
+        love,
+        happy,
+        skill,
+        help,
+        inspire,
       })
     })
 
@@ -446,7 +467,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
-      channel: channel_id,
+      // channel: channel_id,
       // text: '*Coffee or Tea:* ' + selectOption + '\n\n' + '*Introduction:* ' + intro + '\n\n' + '*Interest:* ' + interest + '\n\n' + '*Fun Fact:* ' + funFact + '\n\n' + '*Social Media:* ' + socialMedia + '\n\n',
       "blocks": [
         {
