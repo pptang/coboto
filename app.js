@@ -442,7 +442,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   const angry = view['state']['values']['angry_block']['angry']['value'];
   const sell = view['state']['values']['sell_block']['sell']['value'];
   const job = view['state']['values']['job_block']['job']['value'];
-  const channel = view['state']['values']['channel_block']['channel']['selected_conversation'];
+  const channel_id = view['state']['values']['channel_block']['channel']['selected_conversation'];
   
   
   // Message the user
@@ -458,6 +458,9 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         skill,
         help,
         inspire,
+        angry,
+        sell,
+        job,
       })
     })
 
@@ -467,7 +470,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
-      // channel: channel_id,
+      channel: channel_id,
       // text: '*Coffee or Tea:* ' + selectOption + '\n\n' + '*Introduction:* ' + intro + '\n\n' + '*Interest:* ' + interest + '\n\n' + '*Fun Fact:* ' + funFact + '\n\n' + '*Social Media:* ' + socialMedia + '\n\n',
       "blocks": [
         {
