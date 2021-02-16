@@ -74,7 +74,200 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
       token: context.botToken,
       // Pass a valid trigger_id within 3 seconds of receiving it
       trigger_id: payload.trigger_id,
+
       // View payload
+      view: {
+        // View identifier
+        "callback_id": 'view_1',
+        "type": "modal",
+        "title": {
+          "type": "plain_text",
+          "text": "Ikigai",
+          "emoji": true
+        },
+        "submit": {
+          "type": "plain_text",
+          "text": "Submit",
+          "emoji": true
+        },
+        "close": {
+          "type": "plain_text",
+          "text": "Cancel",
+          "emoji": true
+        },
+        "blocks": [
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "Hello, create your *Ikigai* graph by answering questions as below:"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*DO WHAT YOU LOVE*"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "love"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "What did you love doing or thinking about when you were a child?",
+              "emoji": true
+            }
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "happy"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "What activities do you do in your spare time that make you happy?",
+              "emoji": true
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*DO WHAT YOU'RE GOOD AT*"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "skill"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "What are your skills and strengths",
+              "emoji": true
+            }
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "help"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "What do people ask you help for?",
+              "emoji": true
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*DO SOMETHING THE WORLD NEEDS*"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "inspire"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "What/Who inspires you?",
+              "emoji": true
+            }
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "angry"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "What makes you angry / frustrated?",
+              "emoji": true
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*DO SOMETHING YOU CAN BE PAID FOR*"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "sell"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "What product/service could you sell?",
+              "emoji": true
+            }
+          },
+          {
+            "type": "input",
+            "element": {
+              "type": "plain_text_input",
+              "action_id": "job"
+            },
+            "label": {
+              "type": "plain_text",
+              "text": "What job could you do?",
+              "emoji": true
+            }
+          },
+          {
+            // "block_id": "my_block_id",
+            "type": "input",
+            "optional": true,
+            "label": {
+              "type": "plain_text",
+              "text": "Select a channel to post the result on",
+            },
+            "element": {
+              "action_id": "channel",
+              "type": "conversations_select",
+              "default_to_current_conversation": true,
+              "response_url_enabled": true,
+            },
+          },
+        ]
+      }
 //       view: {
 //         "type": "modal",
 //         // View identifier
@@ -224,15 +417,17 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
 
   // Assume there's an input block with `test_input` as the block_id and `dreamy_input` as the action_id
-
-  const channel_id = view['state']['values']['my_block_id']['my_action_id']['selected_conversation'];
-  const intro = view['state']['values']['intro_block']['intro']['value'];
-  const funFact = view['state']['values']['funFact_block']['fun_fact']['value'];
-  const interest = view['state']['values']['interest_block']['interest']['value'];
-  const socialMedia = view['state']['values']['socialMedia_block']['social_media']['value'];
-  const selectOption = view['state']['values']['select_block']['radio_buttons-action']['selected_option']['value'];
-  const photoUrl = view['state']['values']['photoUrl_block']['photo_url']['value'];
-
+  console.log('test')
+  const channel_id = view['state']['values']['channel']['selected_conversation'];
+  
+  // const intro = view['state']['values']['intro_block']['intro']['value'];
+  // const funFact = view['state']['values']['funFact_block']['fun_fact']['value'];
+  // const interest = view['state']['values']['interest_block']['interest']['value'];
+  // const socialMedia = view['state']['values']['socialMedia_block']['social_media']['value'];
+  // const selectOption = view['state']['values']['select_block']['radio_buttons-action']['selected_option']['value'];
+  // const photoUrl = view['state']['values']['photoUrl_block']['photo_url']['value'];
+  const values = view['state']['values'];
+  console.log(values);
   // Message the user
   try {
     const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-ikigai', {
@@ -264,48 +459,48 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         {
           "type": "divider"
         },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*Coffee or Tea:* " + selectOption
-          }
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*Introduction:* " + intro
-          }
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*Interest:* " + interest
-          }
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*Fun Fact:* " + funFact
-          }
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*Social Media:* " + socialMedia
-          }
-        },
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": "*A photo of me:* "
-          }
-        },
+        // {
+        //   "type": "section",
+        //   "text": {
+        //     "type": "mrkdwn",
+        //     "text": "*Coffee or Tea:* " + selectOption
+        //   }
+        // },
+        // {
+        //   "type": "section",
+        //   "text": {
+        //     "type": "mrkdwn",
+        //     "text": "*Introduction:* " + intro
+        //   }
+        // },
+        // {
+        //   "type": "section",
+        //   "text": {
+        //     "type": "mrkdwn",
+        //     "text": "*Interest:* " + interest
+        //   }
+        // },
+        // {
+        //   "type": "section",
+        //   "text": {
+        //     "type": "mrkdwn",
+        //     "text": "*Fun Fact:* " + funFact
+        //   }
+        // },
+        // {
+        //   "type": "section",
+        //   "text": {
+        //     "type": "mrkdwn",
+        //     "text": "*Social Media:* " + socialMedia
+        //   }
+        // },
+        // {
+        //   "type": "section",
+        //   "text": {
+        //     "type": "mrkdwn",
+        //     "text": "*A photo of me:* "
+        //   }
+        // },
         {
           "type": "image",
           "image_url": 'https://pecha-kucha-mashi-mashi.herokuapp.com/' + path,
