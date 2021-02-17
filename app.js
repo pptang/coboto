@@ -467,7 +467,6 @@ app.view('view_1', async ({ ack, body, view, context }) => {
     const data = await res.json();
     
     const imgUrl = data.imgUrl;
-    console.log(imgUrl);
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
