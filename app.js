@@ -354,7 +354,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                     "value": "tea"
                   }
                 ],
-                "action_id": "actionId-0"
+                "action_id": "drink"
               }
             ]
           },
@@ -695,31 +695,24 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   const sports = view['state']['values']['sports_block']['sports']['selected_option']['value'];
   const place = view['state']['values']['place_block']['place']['selected_option']['value'];
   const food = view['state']['values']['food_block']['food']['selected_option']['value'];
-  const ball = view['state']['values']['ball_block']['ball']['selected_option']['value'];
-  const ball = view['state']['values']['ball_block']['ball']['selected_option']['value'];
-  
+  const entertainment = view['state']['values']['entertainment_block']['entertainment']['selected_option']['value'];
+  const drink = view['state']['values']['drink_block']['drink']['selected_option']['value'];
+  console.log({ball, alcohol, sports,place, food, entertainment, drink})
   // Message the user
   try {
-//     const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-ikigai', {
-//       method: 'POST',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify({
-//         love,
-//         happy,
-//         skill,
-//         help,
-//         inspire,
-//         angry,
-//         sell,
-//         job,
-//       })
-//     })
+    const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-preference-chart', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        ball, alcohol, sports, place, food, entertainment, drink,
+      })
+    })
 
-//     const data = await res.json();
+    const data = await res.json();
     
-//     const imgUrl = data.imgUrl;
+    const imgUrl = data.imgUrl;
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
@@ -778,11 +771,11 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         //     "text": "*A photo of me:* "
         //   }
         // },
-        // {
-        //   "type": "image",
-        //   "image_url": imgUrl,
-        //   "alt_text": "inspiration"
-        // }
+        {
+          "type": "image",
+          "image_url": imgUrl,
+          "alt_text": "inspiration"
+        }
       ]
     });
   }
