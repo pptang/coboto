@@ -114,151 +114,396 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
-            "type": "divider"
-          },
-          {
-            "block_id": "love_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "love"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "What did you love doing or thinking about when you were a child?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "happy_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "happy"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "What activities do you do in your spare time that make you happy?",
-              "emoji": true
-            }
-          },
-          {
-            "type": "divider"
-          },
-          {
-            "type": "section",
+            "type": "header",
             "text": {
-              "type": "mrkdwn",
-              "text": "*DO WHAT YOU'RE GOOD AT*"
-            }
-          },
-          {
-            "type": "divider"
-          },
-          {
-            "block_id": "skill_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "skill"
-            },
-            "label": {
               "type": "plain_text",
-              "text": "What are your skills and strengths",
+              "text": "Ball",
               "emoji": true
             }
           },
           {
-            "block_id": "help_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "help"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "What do people ask you help for?",
-              "emoji": true
-            }
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🏀",
+                      "emoji": true
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🏓",
+                      "emoji": true
+                    },
+                    "value": "value-1"
+                  }
+                ],
+                "action_id": "actionId-0"
+              }
+            ]
           },
           {
-            "type": "divider"
-          },
-          {
-            "type": "section",
+            "type": "header",
             "text": {
-              "type": "mrkdwn",
-              "text": "*DO SOMETHING THE WORLD NEEDS*"
-            }
-          },
-          {
-            "type": "divider"
-          },
-          {
-            "block_id": "inspire_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "inspire"
-            },
-            "label": {
               "type": "plain_text",
-              "text": "What/Who inspires you?",
+              "text": "Alchohol",
               "emoji": true
             }
           },
           {
-            "block_id": "angry_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "angry"
-            },
-            "label": {
-              "type": "plain_text",
-              "text": "What makes you angry / frustrated?",
-              "emoji": true
-            }
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🍷",
+                      "emoji": true
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🥃",
+                      "emoji": true
+                    },
+                    "value": "value-1"
+                  }
+                ],
+                "action_id": "actionId-0"
+              }
+            ]
           },
           {
-            "type": "divider"
-          },
-          {
-            "type": "section",
+            "type": "header",
             "text": {
-              "type": "mrkdwn",
-              "text": "*DO SOMETHING YOU CAN BE PAID FOR*"
-            }
-          },
-          {
-            "type": "divider"
-          },
-          {
-            "block_id": "sell_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "sell"
-            },
-            "label": {
               "type": "plain_text",
-              "text": "What product/service could you sell?",
+              "text": "Sports",
               "emoji": true
             }
           },
           {
-            "block_id": "job_block",
-            "type": "input",
-            "element": {
-              "type": "plain_text_input",
-              "action_id": "job"
-            },
-            "label": {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🏃‍",
+                      "emoji": true
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🏋️‍♂️",
+                      "emoji": true
+                    },
+                    "value": "value-1"
+                  }
+                ],
+                "action_id": "actionId-0"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
               "type": "plain_text",
-              "text": "What job could you do?",
+              "text": "Place",
               "emoji": true
             }
           },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🏔",
+                      "emoji": true
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🌊",
+                      "emoji": true
+                    },
+                    "value": "value-1"
+                  }
+                ],
+                "action_id": "actionId-0"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": "Food",
+              "emoji": true
+            }
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🌯",
+                      "emoji": true
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🍔",
+                      "emoji": true
+                    },
+                    "value": "value-1"
+                  }
+                ],
+                "action_id": "actionId-0"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": "Entertainment",
+              "emoji": true
+            }
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "📺",
+                      "emoji": true
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🎤",
+                      "emoji": true
+                    },
+                    "value": "value-1"
+                  }
+                ],
+                "action_id": "actionId-0"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": "Drink",
+              "emoji": true
+            }
+          },
+          {
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "☕️",
+                      "emoji": true
+                    },
+                    "value": "value-0"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🍵",
+                      "emoji": true
+                    },
+                    "value": "value-1"
+                  }
+                ],
+                "action_id": "actionId-0"
+              }
+            ]
+          },
+          // {
+          //   "type": "divider"
+          // },
+          // {
+          //   "block_id": "love_block",
+          //   "type": "input",
+          //   "element": {
+          //     "type": "plain_text_input",
+          //     "action_id": "love"
+          //   },
+          //   "label": {
+          //     "type": "plain_text",
+          //     "text": "What did you love doing or thinking about when you were a child?",
+          //     "emoji": true
+          //   }
+          // },
+          // {
+          //   "block_id": "happy_block",
+          //   "type": "input",
+          //   "element": {
+          //     "type": "plain_text_input",
+          //     "action_id": "happy"
+          //   },
+          //   "label": {
+          //     "type": "plain_text",
+          //     "text": "What activities do you do in your spare time that make you happy?",
+          //     "emoji": true
+          //   }
+          // },
+          // {
+          //   "type": "divider"
+          // },
+          // {
+          //   "type": "section",
+          //   "text": {
+          //     "type": "mrkdwn",
+          //     "text": "*DO WHAT YOU'RE GOOD AT*"
+          //   }
+          // },
+          // {
+          //   "type": "divider"
+          // },
+          // {
+          //   "block_id": "skill_block",
+          //   "type": "input",
+          //   "element": {
+          //     "type": "plain_text_input",
+          //     "action_id": "skill"
+          //   },
+          //   "label": {
+          //     "type": "plain_text",
+          //     "text": "What are your skills and strengths",
+          //     "emoji": true
+          //   }
+          // },
+          // {
+          //   "block_id": "help_block",
+          //   "type": "input",
+          //   "element": {
+          //     "type": "plain_text_input",
+          //     "action_id": "help"
+          //   },
+          //   "label": {
+          //     "type": "plain_text",
+          //     "text": "What do people ask you help for?",
+          //     "emoji": true
+          //   }
+          // },
+          // {
+          //   "type": "divider"
+          // },
+          // {
+          //   "type": "section",
+          //   "text": {
+          //     "type": "mrkdwn",
+          //     "text": "*DO SOMETHING THE WORLD NEEDS*"
+          //   }
+          // },
+          // {
+          //   "type": "divider"
+          // },
+          // {
+          //   "block_id": "inspire_block",
+          //   "type": "input",
+          //   "element": {
+          //     "type": "plain_text_input",
+          //     "action_id": "inspire"
+          //   },
+          //   "label": {
+          //     "type": "plain_text",
+          //     "text": "What/Who inspires you?",
+          //     "emoji": true
+          //   }
+          // },
+          // {
+          //   "block_id": "angry_block",
+          //   "type": "input",
+          //   "element": {
+          //     "type": "plain_text_input",
+          //     "action_id": "angry"
+          //   },
+          //   "label": {
+          //     "type": "plain_text",
+          //     "text": "What makes you angry / frustrated?",
+          //     "emoji": true
+          //   }
+          // },
+          // {
+          //   "type": "divider"
+          // },
+          // {
+          //   "type": "section",
+          //   "text": {
+          //     "type": "mrkdwn",
+          //     "text": "*DO SOMETHING YOU CAN BE PAID FOR*"
+          //   }
+          // },
+          // {
+          //   "type": "divider"
+          // },
+          // {
+          //   "block_id": "sell_block",
+          //   "type": "input",
+          //   "element": {
+          //     "type": "plain_text_input",
+          //     "action_id": "sell"
+          //   },
+          //   "label": {
+          //     "type": "plain_text",
+          //     "text": "What product/service could you sell?",
+          //     "emoji": true
+          //   }
+          // },
+          // {
+          //   "block_id": "job_block",
+          //   "type": "input",
+          //   "element": {
+          //     "type": "plain_text_input",
+          //     "action_id": "job"
+          //   },
+          //   "label": {
+          //     "type": "plain_text",
+          //     "text": "What job could you do?",
+          //     "emoji": true
+          //   }
+          // },
           {
             "block_id": "channel_block",
             "type": "input",
@@ -434,39 +679,40 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   // const socialMedia = view['state']['values']['socialMedia_block']['social_media']['value'];
   // const selectOption = view['state']['values']['select_block']['radio_buttons-action']['selected_option']['value'];
   // const photoUrl = view['state']['values']['photoUrl_block']['photo_url']['value'];
-  const love = view['state']['values']['love_block']['love']['value'];
-  const happy = view['state']['values']['happy_block']['happy']['value'];
-  const skill = view['state']['values']['skill_block']['skill']['value'];
-  const help = view['state']['values']['help_block']['help']['value'];
-  const inspire = view['state']['values']['inspire_block']['inspire']['value'];
-  const angry = view['state']['values']['angry_block']['angry']['value'];
-  const sell = view['state']['values']['sell_block']['sell']['value'];
-  const job = view['state']['values']['job_block']['job']['value'];
+  // const love = view['state']['values']['_block']['love']['value'];
+  // const happy = view['state']['values']['happy_block']['happy']['value'];
+  // const skill = view['state']['values']['skill_block']['skill']['value'];
+  // const help = view['state']['values']['help_block']['help']['value'];
+  // const inspire = view['state']['values']['inspire_block']['inspire']['value'];
+  // const angry = view['state']['values']['angry_block']['angry']['value'];
+  // const sell = view['state']['values']['sell_block']['sell']['value'];
+  // const job = view['state']['values']['job_block']['job']['value'];
+  console.log(view['state']['values'])
   const channel_id = view['state']['values']['channel_block']['channel']['selected_conversation'];
   
   
   // Message the user
   try {
-    const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-ikigai', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        love,
-        happy,
-        skill,
-        help,
-        inspire,
-        angry,
-        sell,
-        job,
-      })
-    })
+//     const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-ikigai', {
+//       method: 'POST',
+//       headers: {
+//         'Content-Type': 'application/json'
+//       },
+//       body: JSON.stringify({
+//         love,
+//         happy,
+//         skill,
+//         help,
+//         inspire,
+//         angry,
+//         sell,
+//         job,
+//       })
+//     })
 
-    const data = await res.json();
+//     const data = await res.json();
     
-    const imgUrl = data.imgUrl;
+//     const imgUrl = data.imgUrl;
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
@@ -525,12 +771,11 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         //     "text": "*A photo of me:* "
         //   }
         // },
-        {
-          "type": "image",
-          "image_url": imgUrl,
-          // "image_url": "https://i1.wp.com/thetempest.co/wp-content/uploads/2017/08/The-wise-words-of-Michael-Scott-Imgur-2.jpg?w=1024&ssl=1",
-          "alt_text": "inspiration"
-        }
+        // {
+        //   "type": "image",
+        //   "image_url": imgUrl,
+        //   "alt_text": "inspiration"
+        // }
       ]
     });
   }
