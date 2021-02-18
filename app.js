@@ -107,13 +107,6 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "divider"
           },
           {
-            "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": "*DO WHAT YOU LOVE*"
-            }
-          },
-          {
             "type": "header",
             "text": {
               "type": "plain_text",
@@ -122,6 +115,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "ball_block",
             "type": "actions",
             "elements": [
               {
@@ -133,7 +127,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🏀",
                       "emoji": true
                     },
-                    "value": "value-0"
+                    "value": "basketball"
                   },
                   {
                     "text": {
@@ -141,10 +135,10 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🏓",
                       "emoji": true
                     },
-                    "value": "value-1"
+                    "value": "tableTennis"
                   }
                 ],
-                "action_id": "actionId-0"
+                "action_id": "ball"
               }
             ]
           },
@@ -157,6 +151,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "alcohol_block",
             "type": "actions",
             "elements": [
               {
@@ -168,7 +163,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🍷",
                       "emoji": true
                     },
-                    "value": "value-0"
+                    "value": "wine"
                   },
                   {
                     "text": {
@@ -176,10 +171,10 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🥃",
                       "emoji": true
                     },
-                    "value": "value-1"
+                    "value": "whisky"
                   }
                 ],
-                "action_id": "actionId-0"
+                "action_id": "alcohol"
               }
             ]
           },
@@ -192,6 +187,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "sports_block",
             "type": "actions",
             "elements": [
               {
@@ -203,7 +199,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🏃‍",
                       "emoji": true
                     },
-                    "value": "value-0"
+                    "value": "running"
                   },
                   {
                     "text": {
@@ -211,10 +207,10 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🏋️‍♂️",
                       "emoji": true
                     },
-                    "value": "value-1"
+                    "value": "gym"
                   }
                 ],
-                "action_id": "actionId-0"
+                "action_id": "sports"
               }
             ]
           },
@@ -227,6 +223,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "place_block",
             "type": "actions",
             "elements": [
               {
@@ -238,7 +235,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🏔",
                       "emoji": true
                     },
-                    "value": "value-0"
+                    "value": "mountain"
                   },
                   {
                     "text": {
@@ -246,10 +243,10 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🌊",
                       "emoji": true
                     },
-                    "value": "value-1"
+                    "value": "sea"
                   }
                 ],
-                "action_id": "actionId-0"
+                "action_id": "place"
               }
             ]
           },
@@ -262,6 +259,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "food_block",
             "type": "actions",
             "elements": [
               {
@@ -273,7 +271,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🌯",
                       "emoji": true
                     },
-                    "value": "value-0"
+                    "value": "burrito"
                   },
                   {
                     "text": {
@@ -281,10 +279,10 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🍔",
                       "emoji": true
                     },
-                    "value": "value-1"
+                    "value": "burger"
                   }
                 ],
-                "action_id": "actionId-0"
+                "action_id": "food"
               }
             ]
           },
@@ -297,6 +295,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "entertainment_block",
             "type": "actions",
             "elements": [
               {
@@ -308,7 +307,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "📺",
                       "emoji": true
                     },
-                    "value": "value-0"
+                    "value": "tv"
                   },
                   {
                     "text": {
@@ -316,10 +315,10 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🎤",
                       "emoji": true
                     },
-                    "value": "value-1"
+                    "value": "music"
                   }
                 ],
-                "action_id": "actionId-0"
+                "action_id": "entertainment"
               }
             ]
           },
@@ -332,6 +331,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             }
           },
           {
+            "block_id": "drink_block",
             "type": "actions",
             "elements": [
               {
@@ -343,7 +343,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "☕️",
                       "emoji": true
                     },
-                    "value": "value-0"
+                    "value": "coffee"
                   },
                   {
                     "text": {
@@ -351,7 +351,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                       "text": "🍵",
                       "emoji": true
                     },
-                    "value": "value-1"
+                    "value": "tea"
                   }
                 ],
                 "action_id": "actionId-0"
@@ -690,6 +690,13 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   console.log(view['state']['values'])
   const channel_id = view['state']['values']['channel_block']['channel']['selected_conversation'];
   
+  const ball = view['state']['values']['ball_block']['ball']['selected_option']['value'];
+  const alcohol = view['state']['values']['alcohol_block']['alcohol']['selected_option']['value'];
+  const sports = view['state']['values']['sports_block']['sports']['selected_option']['value'];
+  const place = view['state']['values']['place_block']['place']['selected_option']['value'];
+  const food = view['state']['values']['food_block']['food']['selected_option']['value'];
+  const ball = view['state']['values']['ball_block']['ball']['selected_option']['value'];
+  const ball = view['state']['values']['ball_block']['ball']['selected_option']['value'];
   
   // Message the user
   try {
