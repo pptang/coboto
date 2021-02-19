@@ -196,10 +196,10 @@ app.command('/coboto', async ({ ack, payload, context }) => {
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🥃",
+                      "text": "🍺",
                       "emoji": true
                     },
-                    "value": "whisky"
+                    "value": "beer"
                   }
                 ],
                 "action_id": "alcohol"
