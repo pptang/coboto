@@ -7,8 +7,6 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET
 });
 
-
-
 // All the room in the world for your code
 app.event('app_home_opened', async ({ event, client, context }) => {
   try {
