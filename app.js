@@ -114,7 +114,6 @@ app.command('/coboto', async ({ ack, payload, context }) => {
       token: context.botToken,
       // Pass a valid trigger_id within 3 seconds of receiving it
       trigger_id: payload.trigger_id,
-      response_action: "update",
       // View payload
       view: {
         type: 'modal',
@@ -145,7 +144,7 @@ app.command('/coboto', async ({ ack, payload, context }) => {
           },
           {
             "block_id": "drink_block",
-            // "type": "actions",
+            "type": "actions",
             "elements": [
               {
                 "type": "radio_buttons",
@@ -167,6 +166,7 @@ app.command('/coboto', async ({ ack, payload, context }) => {
                     "value": "tea"
                   }
                 ],
+                "action_id": "drink"
               }
             ]
           },
@@ -549,7 +549,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        drink, alcohol, winter,manager, communication, working, food, place, energy, exercise
+        channelId, drink, alcohol, winter,manager, communication, working, food, place, energy, exercise
       })
     })
 
