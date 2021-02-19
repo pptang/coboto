@@ -114,6 +114,7 @@ app.command('/coboto', async ({ ack, payload, context }) => {
       token: context.botToken,
       // Pass a valid trigger_id within 3 seconds of receiving it
       trigger_id: payload.trigger_id,
+      response_action: "update",
       // View payload
       view: {
         type: 'modal',
@@ -144,7 +145,7 @@ app.command('/coboto', async ({ ack, payload, context }) => {
           },
           {
             "block_id": "drink_block",
-            "type": "actions",
+            // "type": "actions",
             "elements": [
               {
                 "type": "radio_buttons",
