@@ -121,37 +121,9 @@ app.command('/coboto', async ({ ack, payload, context }) => {
         callback_id: 'view_1',
         title: {
           type: 'plain_text',
-          text: 'Modal title'
+          text: 'COBOTO'
         },
         blocks: [
-          {
-            type: 'section',
-            text: {
-              type: 'mrkdwn',
-              text: 'Welcome to a modal with _blocks_'
-            },
-            accessory: {
-              type: 'button',
-              text: {
-                type: 'plain_text',
-                text: 'Click me!'
-              },
-              action_id: 'button_abc'
-            }
-          },
-          {
-            type: 'input',
-            block_id: 'test_input',
-            label: {
-              type: 'plain_text',
-              text: 'What are your hopes and dreams?'
-            },
-            element: {
-              type: 'plain_text_input',
-              action_id: 'dreamy_input',
-              multiline: true
-            }
-          },
           {
             "type": "section",
             "text": {
@@ -194,7 +166,6 @@ app.command('/coboto', async ({ ack, payload, context }) => {
                     "value": "tea"
                   }
                 ],
-                "action_id": "drink"
               }
             ]
           },
@@ -468,7 +439,7 @@ app.command('/coboto', async ({ ack, payload, context }) => {
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "☀️",
+                      "text": "🌞",
                       "emoji": true
                     },
                     "value": "day"
@@ -544,499 +515,31 @@ app.command('/coboto', async ({ ack, payload, context }) => {
         }
       }
     });
-    console.log(result);
   }
   catch (error) {
     console.error(error);
   }
 });
 
-// Listen for a slash command invocation
-app.command('/cobotfsdo', async ({ ack, payload, context }) => {
-  // Acknowledge the command request
-  ack();
-
-  try {
-    const result = await app.client.views.open({
-      token: context.botToken,
-      // Pass a valid trigger_id within 3 seconds of receiving it
-      trigger_id: payload.trigger_id,
-
-      // View payload
-      view: {
-        // View identifier
-        "callback_id": 'view_1',
-        "type": "modal",
-        "title": {
-          "type": "plain_text",
-          "text": "Coboto",
-          "emoji": true
-        },
-        "submit": {
-          "type": "plain_text",
-          "text": "Submit",
-          "emoji": true
-        },
-        "close": {
-          "type": "plain_text",
-          "text": "Cancel",
-          "emoji": true
-        },
-        "blocks": [
-          {
-            "type": "section",
-            "text": {
-              "type": "mrkdwn",
-              "text": "Hello, create your *Ikigai* graph by answering questions as below:"
-            }
-          },
-          {
-            "type": "divider"
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Drink at work?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "drink_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "☕️",
-                      "emoji": true
-                    },
-                    "value": "coffee"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🍵",
-                      "emoji": true
-                    },
-                    "value": "tea"
-                  }
-                ],
-                "action_id": "drink"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Drink after work?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "alcohol_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🍷",
-                      "emoji": true
-                    },
-                    "value": "wine"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🥃",
-                      "emoji": true
-                    },
-                    "value": "whisky"
-                  }
-                ],
-                "action_id": "alcohol"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Your winter choice?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "winter_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "⛷",
-                      "emoji": true
-                    },
-                    "value": "ski"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🏂",
-                      "emoji": true
-                    },
-                    "value": "snowboard"
-                  }
-                ],
-                "action_id": "winter"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Your manager is?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "manager_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🦁",
-                      "emoji": true
-                    },
-                    "value": "lion"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🐑",
-                      "emoji": true
-                    },
-                    "value": "sheep"
-                  }
-                ],
-                "action_id": "manager"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Communication style?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "communication_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🐶",
-                      "emoji": true
-                    },
-                    "value": "dog"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "😸",
-                      "emoji": true
-                    },
-                    "value": "cat"
-                  }
-                ],
-                "action_id": "communication"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Working style?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "working_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🏹",
-                      "emoji": true
-                    },
-                    "value": "arrow"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "👩‍🌾",
-                      "emoji": true
-                    },
-                    "value": "farmer"
-                  }
-                ],
-                "action_id": "working"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Your favorite lunch?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "food_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🍔",
-                      "emoji": true
-                    },
-                    "value": "burger"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🍣",
-                      "emoji": true
-                    },
-                    "value": "sushi"
-                  }
-                ],
-                "action_id": "food"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Have fun on holiday?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "place_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "⛰",
-                      "emoji": true
-                    },
-                    "value": "mountain"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🌊",
-                      "emoji": true
-                    },
-                    "value": "sea"
-                  }
-                ],
-                "action_id": "place"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Energy hours?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "energy_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "☀️",
-                      "emoji": true
-                    },
-                    "value": "day"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🧛‍♀️",
-                      "emoji": true
-                    },
-                    "value": "night"
-                  }
-                ],
-                "action_id": "energy"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Your favorite lunch?",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "exercise_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🏋️‍♂️",
-                      "emoji": true
-                    },
-                    "value": "gym"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🏃‍♀️",
-                      "emoji": true
-                    },
-                    "value": "running"
-                  }
-                ],
-                "action_id": "exercise"
-              }
-            ]
-          },
-          {
-            "block_id": "channel_block",
-            "type": "input",
-            "optional": true,
-            "label": {
-              "type": "plain_text",
-              "text": "Select a channel to post the result on",
-            },
-            "element": {
-              "action_id": "channel",
-              "type": "conversations_select",
-              "default_to_current_conversation": true,
-              "response_url_enabled": true,
-            },
-          },
-        ]
-      }
-      // View payload
-      // view: {
-      //   type: 'modal',
-      //   // View identifier
-      //   callback_id: 'view_1',
-      //   title: {
-      //     type: 'plain_text',
-      //     text: 'Modal title'
-      //   },
-      //   blocks: [
-      //     {
-      //       type: 'section',
-      //       text: {
-      //         type: 'mrkdwn',
-      //         text: 'Welcome to a modal with _blocks_'
-      //       },
-      //       accessory: {
-      //         type: 'button',
-      //         text: {
-      //           type: 'plain_text',
-      //           text: 'Click me!'
-      //         },
-      //         action_id: 'button_abc'
-      //       }
-      //     },
-      //     {
-      //       type: 'input',
-      //       block_id: 'test_input',
-      //       label: {
-      //         type: 'plain_text',
-      //         text: 'What are your hopes and dreams?'
-      //       },
-      //       element: {
-      //         type: 'plain_text_input',
-      //         action_id: 'dreamy_input',
-      //         multiline: true
-      //       }
-      //     }
-      //   ],
-      //   submit: {
-      //     type: 'plain_text',
-      //     text: 'Submit'
-      //   }
-      // }
-    });
-  }
-  catch (error) {
-    console.error(error);
-  }
-});
 
 app.view('view_1', async ({ ack, body, view, context }) => {
   // Acknowledge the view_submission event
   ack();
   
-  // Do whatever you want with the input data - here we're saving it to a DB then sending the user a verifcation of their submission
-  console.log(view['state']['values'])
-  const channel_id = view['state']['values']['channel_block']['channel']['selected_conversation'];
+  const channelId = view['state']['values']['channel_block']['channel']['selected_conversation'];
   
-  const ball = view['state']['values']['ball_block']['ball']['selected_option']['value'];
-  const alcohol = view['state']['values']['alcohol_block']['alcohol']['selected_option']['value'];
-  const sports = view['state']['values']['sports_block']['sports']['selected_option']['value'];
-  const place = view['state']['values']['place_block']['place']['selected_option']['value'];
-  const food = view['state']['values']['food_block']['food']['selected_option']['value'];
-  const entertainment = view['state']['values']['entertainment_block']['entertainment']['selected_option']['value'];
   const drink = view['state']['values']['drink_block']['drink']['selected_option']['value'];
-  console.log({ball, alcohol, sports,place, food, entertainment, drink})
+  const alcohol = view['state']['values']['alcohol_block']['alcohol']['selected_option']['value'];
+  const winter = view['state']['values']['winter_block']['winter']['selected_option']['value'];
+  const manager = view['state']['values']['manager_block']['manager']['selected_option']['value'];
+  const communication = view['state']['values']['communication_block']['communication']['selected_option']['value'];
+  const working = view['state']['values']['working_block']['working']['selected_option']['value'];
+  const food = view['state']['values']['food_block']['food']['selected_option']['value'];
+  const place = view['state']['values']['place_block']['place']['selected_option']['value'];
+  const energy = view['state']['values']['energy_block']['energy']['selected_option']['value'];
+  const exercise = view['state']['values']['exercise_block']['exercise']['selected_option']['value'];
+  
+  console.log({drink, alcohol, winter,manager, communication, working, food, place, energy, exercise})
   // Message the user
   try {
     const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-preference-chart', {
@@ -1045,7 +548,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        ball, alcohol, sports, place, food, entertainment, drink,
+        drink, alcohol, winter,manager, communication, working, food, place, energy, exercise
       })
     })
 
@@ -1055,7 +558,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
     await app.client.chat.postMessage({
       token: context.botToken,
       // Channel to send message to
-      channel: channel_id,
+      channel: channelId,
       // text: '*Coffee or Tea:* ' + selectOption + '\n\n' + '*Introduction:* ' + intro + '\n\n' + '*Interest:* ' + interest + '\n\n' + '*Fun Fact:* ' + funFact + '\n\n' + '*Social Media:* ' + socialMedia + '\n\n',
       "blocks": [
         {
