@@ -564,7 +564,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Hello, Check this out 👀"
+            "text": "COBOTO! Check what your team mem like!  👀"
           }
         },
         {
