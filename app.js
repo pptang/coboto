@@ -97,6 +97,7 @@ app.event('app_home_opened', async ({ event, client, context }) => {
         ]
       }
     });
+    console.log(result)
   }
   catch (error) {
     console.error(error);
@@ -105,7 +106,7 @@ app.event('app_home_opened', async ({ event, client, context }) => {
 
 
 // Listen for a slash command invocation
-app.command('/pechakucha', async ({ ack, payload, context }) => {
+app.command('/coboto', async ({ ack, payload, context }) => {
   // Acknowledge the command request
   ack();
 
@@ -250,7 +251,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                     "value": "snowboard"
                   }
                 ],
-                "action_id": "ball"
+                "action_id": "winter"
               }
             ]
           },
@@ -258,12 +259,12 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "header",
             "text": {
               "type": "plain_text",
-              "text": "Sports",
+              "text": "Your manager is?",
               "emoji": true
             }
           },
           {
-            "block_id": "sports_block",
+            "block_id": "manager_block",
             "type": "actions",
             "elements": [
               {
@@ -272,21 +273,21 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🏃‍",
+                      "text": "🦁",
                       "emoji": true
                     },
-                    "value": "running"
+                    "value": "lion"
                   },
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🏋️‍♂️",
+                      "text": "🐑",
                       "emoji": true
                     },
-                    "value": "gym"
+                    "value": "sheep"
                   }
                 ],
-                "action_id": "sports"
+                "action_id": "manager"
               }
             ]
           },
@@ -294,7 +295,43 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "header",
             "text": {
               "type": "plain_text",
-              "text": "Place",
+              "text": "Communication style?",
+              "emoji": true
+            }
+          },
+          {
+            "block_id": "communication_block",
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🐶",
+                      "emoji": true
+                    },
+                    "value": "dog"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "😸",
+                      "emoji": true
+                    },
+                    "value": "cat"
+                  }
+                ],
+                "action_id": "communication"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": "Working style?",
               "emoji": true
             }
           },
@@ -308,7 +345,79 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🏔",
+                      "text": "🏹",
+                      "emoji": true
+                    },
+                    "value": "arrow"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "👩‍🌾",
+                      "emoji": true
+                    },
+                    "value": "farmer"
+                  }
+                ],
+                "action_id": "working"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": "Your favorite lunch?",
+              "emoji": true
+            }
+          },
+          {
+            "block_id": "food_block",
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🍔",
+                      "emoji": true
+                    },
+                    "value": "burger"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🍣",
+                      "emoji": true
+                    },
+                    "value": "sushi"
+                  }
+                ],
+                "action_id": "food"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": "Have fun on holiday?",
+              "emoji": true
+            }
+          },
+          {
+            "block_id": "place_block",
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "⛰",
                       "emoji": true
                     },
                     "value": "mountain"
@@ -330,12 +439,12 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "header",
             "text": {
               "type": "plain_text",
-              "text": "Food",
+              "text": "Energy hours?",
               "emoji": true
             }
           },
           {
-            "block_id": "food_block",
+            "block_id": "energy_block",
             "type": "actions",
             "elements": [
               {
@@ -344,21 +453,21 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🌯",
+                      "text": "☀️",
                       "emoji": true
                     },
-                    "value": "burrito"
+                    "value": "day"
                   },
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🍔",
+                      "text": "🧛‍♀️",
                       "emoji": true
                     },
-                    "value": "burger"
+                    "value": "night"
                   }
                 ],
-                "action_id": "food"
+                "action_id": "energy"
               }
             ]
           },
@@ -366,12 +475,12 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "header",
             "text": {
               "type": "plain_text",
-              "text": "Entertainment",
+              "text": "Your favorite lunch?",
               "emoji": true
             }
           },
           {
-            "block_id": "entertainment_block",
+            "block_id": "exercise_block",
             "type": "actions",
             "elements": [
               {
@@ -380,21 +489,21 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "📺",
+                      "text": "🏋️‍♂️",
                       "emoji": true
                     },
-                    "value": "tv"
+                    "value": "gym"
                   },
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🎤",
+                      "text": "🏃‍♀️",
                       "emoji": true
                     },
-                    "value": "music"
+                    "value": "running"
                   }
                 ],
-                "action_id": "entertainment"
+                "action_id": "exercise"
               }
             ]
           },
