@@ -540,7 +540,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
   const energy = view['state']['values']['energy_block']['energy']['selected_option']['value'];
   const exercise = view['state']['values']['exercise_block']['exercise']['selected_option']['value'];
   
-  console.log({drink, alcohol, winter,manager, communication, working, food, place, energy, exercise})
+  
   // Message the user
   try {
     const res = await fetch('https://pecha-kucha-mashi-mashi.herokuapp.com/generate-preference-chart', {
@@ -552,7 +552,7 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         channelId, drink, alcohol, winter,manager, communication, working, food, place, energy, exercise
       })
     })
-
+    console.log({channelId});
     const data = await res.json();
     
     const imgUrl = data.imgUrl;
