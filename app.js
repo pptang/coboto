@@ -29,7 +29,7 @@ app.event('app_home_opened', async ({ event, client, context }) => {
             "type": "section",
             "text": {
               "type": "mrkdwn",
-              "text": "*Welcome to your _App's Home_* :tada:"
+              "text": "*COBOTO* :tada:"
             }
           },
           {
@@ -39,7 +39,59 @@ app.event('app_home_opened', async ({ event, client, context }) => {
             "type": "section",
             "text": {
               "type": "mrkdwn",
-              "text": "This button won't do much for now but you can set up a listener for it using the `actions()` method and passing its unique `action_id`. See an example in the `examples` folder within your Bolt app."
+              "text": "More than an icebreaker, COBOTO creates engagement in a group setting and improves team dynamics in a very interesting way. Empower personal characters, COBOTO visualizes things in common of group or people that ultimately offers great opportunities to a deeper relationship as well as a successful team collaboration."
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "*Key Features of ROBOTO!*"
+            }
+          },
+          {
+            "type": "divider"
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "- Super simple"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "- Break the ice with comfort"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "- Make new hires feel welcome"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "- Cultivate openness culture"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "- Meaningful conversation"
+            }
+          },
+          {
+            "type": "section",
+            "text": {
+              "type": "mrkdwn",
+              "text": "- Drives teammates engagement"
             }
           }
         ]
@@ -98,12 +150,12 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "header",
             "text": {
               "type": "plain_text",
-              "text": "Ball",
+              "text": "Drink at work?",
               "emoji": true
             }
           },
           {
-            "block_id": "ball_block",
+            "block_id": "drink_block",
             "type": "actions",
             "elements": [
               {
@@ -112,21 +164,21 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🏀",
+                      "text": "☕️",
                       "emoji": true
                     },
-                    "value": "basketball"
+                    "value": "coffee"
                   },
                   {
                     "text": {
                       "type": "plain_text",
-                      "text": "🏓",
+                      "text": "🍵",
                       "emoji": true
                     },
-                    "value": "tableTennis"
+                    "value": "tea"
                   }
                 ],
-                "action_id": "ball"
+                "action_id": "drink"
               }
             ]
           },
@@ -134,7 +186,7 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
             "type": "header",
             "text": {
               "type": "plain_text",
-              "text": "Alchohol",
+              "text": "Drink after work?",
               "emoji": true
             }
           },
@@ -163,6 +215,42 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                   }
                 ],
                 "action_id": "alcohol"
+              }
+            ]
+          },
+          {
+            "type": "header",
+            "text": {
+              "type": "plain_text",
+              "text": "Your winter choice?",
+              "emoji": true
+            }
+          },
+          {
+            "block_id": "winter_block",
+            "type": "actions",
+            "elements": [
+              {
+                "type": "radio_buttons",
+                "options": [
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "⛷",
+                      "emoji": true
+                    },
+                    "value": "ski"
+                  },
+                  {
+                    "text": {
+                      "type": "plain_text",
+                      "text": "🏂",
+                      "emoji": true
+                    },
+                    "value": "snowboard"
+                  }
+                ],
+                "action_id": "ball"
               }
             ]
           },
@@ -307,42 +395,6 @@ app.command('/pechakucha', async ({ ack, payload, context }) => {
                   }
                 ],
                 "action_id": "entertainment"
-              }
-            ]
-          },
-          {
-            "type": "header",
-            "text": {
-              "type": "plain_text",
-              "text": "Drink",
-              "emoji": true
-            }
-          },
-          {
-            "block_id": "drink_block",
-            "type": "actions",
-            "elements": [
-              {
-                "type": "radio_buttons",
-                "options": [
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "☕️",
-                      "emoji": true
-                    },
-                    "value": "coffee"
-                  },
-                  {
-                    "text": {
-                      "type": "plain_text",
-                      "text": "🍵",
-                      "emoji": true
-                    },
-                    "value": "tea"
-                  }
-                ],
-                "action_id": "drink"
               }
             ]
           },
