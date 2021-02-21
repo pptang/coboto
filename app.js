@@ -3,7 +3,7 @@ const { App } = require('@slack/bolt');
 const fetch = require('node-fetch');
 
 const app = new App({
-  token: process.env.SLACK_BOT_TOKEN,
+  // token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   // For OAuth
   clientId: process.env.SLACK_CLIENT_ID,
