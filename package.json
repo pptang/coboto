@@ -11,7 +11,7 @@
     "node-fetch": "^2.6.1"
   },
   "engines": {
-    "node": "11.x"
+    "node": "12.3"
   },
   "repository": {
     "url": "https://glitch.com/edit/#!/bolt-app-template"
