@@ -74,7 +74,7 @@ const app = new App({
           );
         }
         console.log('enterprise installation data:', doc.data());
-        return doc.data().installation;
+        return doc.data();
       }
       if (installQuery.teamId !== undefined) {
         // single team app installation lookup
@@ -83,7 +83,7 @@ const app = new App({
           throw new Error(`${installQuery.teamId} doc doesn't exist in DB`);
         }
         console.log('team installation data:', doc.data());
-        return doc.data().installation;
+        return doc.data();
       }
       throw new Error('Failed fetching installation');
     },
