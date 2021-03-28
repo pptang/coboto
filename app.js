@@ -83,7 +83,7 @@ const app = new App({
   },
 });
 
-const questionBlocks = questions.map(
+const questionBlocks = questions.flatMap(
   (item) => (
     {
       type: 'header',
@@ -285,40 +285,12 @@ app.view('view_1', async ({ ack, body, view, context }) => {
       'selected_conversation'
     ];
 
-  const drink =
-    view['state']['values']['drink_block']['drink']['selected_option']['value'];
-  const alcohol =
-    view['state']['values']['alcohol_block']['alcohol']['selected_option'][
-      'value'
-    ];
-  const winter =
-    view['state']['values']['winter_block']['winter']['selected_option'][
-      'value'
-    ];
-  const manager =
-    view['state']['values']['manager_block']['manager']['selected_option'][
-      'value'
-    ];
-  const communication =
-    view['state']['values']['communication_block']['communication'][
-      'selected_option'
-    ]['value'];
-  const working =
-    view['state']['values']['working_block']['working']['selected_option'][
-      'value'
-    ];
-  const food =
-    view['state']['values']['food_block']['food']['selected_option']['value'];
-  const place =
-    view['state']['values']['place_block']['place']['selected_option']['value'];
-  const energy =
-    view['state']['values']['energy_block']['energy']['selected_option'][
-      'value'
-    ];
-  const exercise =
-    view['state']['values']['exercise_block']['exercise']['selected_option'][
-      'value'
-    ];
+  const allAnswers = questions.map((item) => ({
+    [item.key]:
+      view['state']['values'][`${item.key}_block`][item.key]['selected_option'][
+        'value'
+      ],
+  }));
 
   // Message the user
   try {
@@ -331,20 +303,10 @@ app.view('view_1', async ({ ack, body, view, context }) => {
         },
         body: JSON.stringify({
           channelId,
-          drink,
-          alcohol,
-          winter,
-          manager,
-          communication,
-          working,
-          food,
-          place,
-          energy,
-          exercise,
+          ...allAnswers,
         }),
       }
     );
-    console.log({ channelId });
     const data = await res.json();
 
     const imgUrl = data.imgUrl;
