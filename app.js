@@ -219,7 +219,6 @@ app.event('app_home_opened', async ({ event, client, context }) => {
 app.command('/coboto', async ({ ack, payload, context }) => {
   // Acknowledge the command request
   ack();
-  console.log({ questionBlocks });
   try {
     const result = await app.client.views.open({
       token: context.botToken,
@@ -283,12 +282,16 @@ app.view('view_1', async ({ ack, body, view, context }) => {
       'selected_conversation'
     ];
 
-  const allAnswers = questions.map((item) => ({
-    [item.key]:
-      view['state']['values'][`${item.key}_block`][item.key]['selected_option'][
-        'value'
-      ],
-  }));
+  const allAnswers = questions.reduce(
+    (acc, item) => ({
+      ...acc,
+      [item.key]:
+        view['state']['values'][`${item.key}_block`][item.key][
+          'selected_option'
+        ]['value'],
+    }),
+    {}
+  );
 
   // Message the user
   try {
