@@ -2,6 +2,22 @@
 const { App } = require('@slack/bolt');
 const fetch = require('node-fetch');
 
+const admin = require('firebase-admin');
+
+admin.initializeApp({
+  credential: admin.credential.cert({
+    projectId: process.env.FIREBASE_PROJECT_ID || 'pecha-kucha-b5a45',
+    privateKey:
+      process.env.FIREBASE_PRIVATE_KEY ||
+      '-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDRum9YZv5vfy4Q\nHGzosM2492q5pkjkvF8KFofFqazgsyVOlmP3hVC9giGEHku/g0Fd04RwEhjez5nw\nJwAwG+lPkRqYMMdFgKHWHDRXycOh3zHREkjA8h3QMvh5aF/wpGnPqDIuxo+yreEj\nPI01rK4YagxUaFMKfENVbYJewOVTaaTF06QPvpbyklxvYjKwTjQQHHS/ws1SejSL\nEdCEqj3+5v90pxbplm1oJSHL5PPrWigqB6X2EDH/5h17o/dejIbsERRtCQTZGSzI\n/HxMdOKA58se2Rn7HOOWMEDQ9H9yFzdubCCLEzTq6Wcktw3Jh6Whzd0jpiJ/ey7t\nFbLpujt9AgMBAAECggEAJF9CnbB4+lGyZaFkYuN8vhIMnIdB14dyrQ90uvs+69Yt\nx2gODLh+ZOtLUDwn014aSUEcVApTbVrQHeXJos5IY1/tHo1BFeTlzDnmev4XEzzf\nyRw0aV/j+z5HuNh44QVGg3iuQU320FxW8fM3oyIgLERCAKZ6FlSwIcHk7PVjoBgf\nCUblqHgBgjnq2i7NV3g3GxNv+GrkNVLRVSsDJwJmaNF8ajSaKgTnyG415Mm7aUbn\nb5w6Z991g9n5HX8gosHnLbclus2mLsQ8CZvPexZQugMJAU1e9FKLdyk3HQjm+s4t\nOcOlkTKHtccwn0BX3UBQuwSha65T5EZmagOH2/6f6QKBgQDwuteqnEEzDf+eWcok\npCUX5tnV9FB5S2tYOBFKk+a5UQBFYYRxxiURxq6RiH46SoQwkxlOgqyaigPe6Lp0\nIseDVMk5+5cn4sY9MC5ooBdvnJGtcQ18OpViT1TM+6kS11nVynvO8neDoFLwreUW\nybZsRU0VpPy+v6NZ58A7vSbBRQKBgQDfCConw1sE9gZzgXlSEaTTcp/8b2I1qR81\nm+MPe00HKRM5F+1IkYgwtaw6/9rrxBy84BQ7X15P9RCSLtVZ0JViHAR1KQoBk5ks\n2pso5g8JTeCHrfp1wEUzHVG65sRh5TSiDd8AcNLD7bI4T55GlcVpJjwsUjvGoGkB\nTIhpX0FI2QKBgHAjiY2HZnPjBH1+dETnVgQxXK5nNgma0XFyBNQJ28Pd8NNhHvJl\nDCWguPdAbxS2W6fJDlPdWYxP2IfBQAITpX8PQwHIqlxBLnmYdTX1xZUPiWkTLeX9\n4FLAg89NODB3svh9b3kyx+vABoLpbrtT0a/UBJmdlsNAwFaEN69caK5FAoGALqZ6\nis6l3yfGuao/QhdGrqOvKxHxLOAvEvuERty3g+PnjW2fyCoInoehesXBeMcQa8FC\n+hg8leTgjnMVVS/3zwmlNQxcd2/z/hnLkoZsZrnPWRHe7XpF/ycGzV0vfnp+w9a6\n6lCvBSRWvsiIhqMVI6VHuM2Ki0VKMWdcsQ2njiECgYEAmDl60WbU4FPNeee6FphH\n39biFZQheIq2zE/dtRsgdaBdDmLst9Agb8GzjRCULyPtdVE3MDHrlHWQ30MdA7kp\nQG++pLAEtoxnSYoj+nVCZCiE0C5mFv+rOko/2X5sElkOIFUZ7OFxwttB7d3G6kEP\n0uXJffoT/RZGVJ84auO5lok=\n-----END PRIVATE KEY-----\n',
+    clientEmail:
+      process.env.FIREBASE_CLIENT_EMAIL ||
+      'firebase-adminsdk-fvuxc@pecha-kucha-b5a45.iam.gserviceaccount.com',
+  }),
+});
+
+const db = admin.firestore();
+
 const app = new App({
   // token: process.env.SLACK_BOT_TOKEN,
   signingSecret: process.env.SLACK_SIGNING_SECRET,
@@ -10,6 +26,42 @@ const app = new App({
   clientSecret: process.env.SLACK_CLIENT_SECRET,
   stateSecret: 'coboto-state-secret',
   scopes: ['chat:write', 'commands'],
+  installationStore: {
+    storeInstallation: async (installation) => {
+      const oauthRef = db.collection('oauth');
+      return await oauthRef
+        .doc(
+          installation.isEnterpriseInstall
+            ? installation.enterprise.id
+            : installation.team.id
+        )
+        .set({ installation });
+    },
+    fetchInstallation: async (installQuery) => {
+      // change the line below so it fetches from your database
+      const oauthRef = db.collection('oauth');
+      if (
+        installQuery.isEnterpriseInstall &&
+        installQuery.enterpriseId !== undefined
+      ) {
+        // org wide app installation lookup
+        const doc = await oauthRef.doc(installQuery.enterpriseId).get();
+        if (!doc.exists) {
+          throw new Error('Failed fetching installation');
+        }
+        return doc.data().installation;
+      }
+      if (installQuery.teamId !== undefined) {
+        // single team app installation lookup
+        const doc = await oauthRef.doc(installQuery.teamId).get();
+        if (!doc.exists) {
+          throw new Error('Failed fetching installation');
+        }
+        return doc.data().installation;
+      }
+      throw new Error('Failed fetching installation');
+    },
+  },
 });
 
 // All the room in the world for your code
