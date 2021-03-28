@@ -1,0 +1,122 @@
+[
+  {
+    "key": "drink",
+    "question": "Drink at work?",
+    "leftOption": {
+      "text": "☕️",
+      "value": "coffee"
+    },
+    "rightOption": {
+      "text": "🍵",
+      "value": "tea"
+    }
+  },
+  {
+    "key": "alcohol",
+    "question": "Drink after work?",
+    "leftOption": {
+      "text": "🍷",
+      "value": "wine"
+    },
+    "rightOption": {
+      "text": "🍺",
+      "value": "beer"
+    }
+  },
+  {
+    "key": "winter",
+    "question": "Your winter choice?",
+    "leftOption": {
+      "text": "⛷",
+      "value": "ski"
+    },
+    "rightOption": {
+      "text": "🏂",
+      "value": "snowboard"
+    }
+  },
+  {
+    "key": "manager",
+    "question": "Your manager is?",
+    "leftOption": {
+      "text": "🦁",
+      "value": "lion"
+    },
+    "rightOption": {
+      "text": "🐑",
+      "value": "sheep"
+    }
+  },
+  {
+    "key": "communication",
+    "question": "Communication style?",
+    "leftOption": {
+      "text": "🐶",
+      "value": "dog"
+    },
+    "rightOption": {
+      "text": "😸",
+      "value": "cat"
+    }
+  },
+  {
+    "key": "working",
+    "question": "Working style?",
+    "leftOption": {
+      "text": "🏹",
+      "value": "arrow"
+    },
+    "rightOption": {
+      "text": "👩‍🌾",
+      "value": "farmer"
+    }
+  },
+  {
+    "key": "food",
+    "question": "Your favorite lunch?",
+    "leftOption": {
+      "text": "🍔",
+      "value": "burger"
+    },
+    "rightOption": {
+      "text": "🍣",
+      "value": "sushi"
+    }
+  },
+  {
+    "key": "place",
+    "question": "Have fun on holiday?",
+    "leftOption": {
+      "text": "⛰",
+      "value": "mountain"
+    },
+    "rightOption": {
+      "text": "🌊",
+      "value": "sea"
+    }
+  },
+  {
+    "key": "energy",
+    "question": "Energy hours?",
+    "leftOption": {
+      "text": "🌞",
+      "value": "day"
+    },
+    "rightOption": {
+      "text": "🧛‍♀️",
+      "value": "night"
+    }
+  },
+  {
+    "key": "exercise",
+    "question": "Your winter choice?",
+    "leftOption": {
+      "text": "🏋️‍♂️",
+      "value": "gym"
+    },
+    "rightOption": {
+      "text": "🏃‍♀️",
+      "value": "running"
+    }
+  }
+]

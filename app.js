@@ -3,9 +3,10 @@ const { App } = require('@slack/bolt');
 const fetch = require('node-fetch');
 
 const admin = require('firebase-admin');
-
+const questions = require('./questions');
 admin.initializeApp({
   credential: admin.credential.cert(
+    // TODO @paipo: fix local env variable configuration for testing
     JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT)
   ),
 });
@@ -42,7 +43,6 @@ const app = new App({
             }
           }
        */
-      console.log('storeInstallation:', { installation });
       const oauthRef = db.collection('oauth');
       return await oauthRef
         .doc(
@@ -53,7 +53,6 @@ const app = new App({
         .set(installation);
     },
     fetchInstallation: async (installQuery) => {
-      console.log('fetchInstallation:', { installQuery });
       // change the line below so it fetches from your database
       const oauthRef = db.collection('oauth');
       if (
@@ -67,7 +66,7 @@ const app = new App({
             `${installQuery.enterprisedId} doc doesn't exist in DB`
           );
         }
-        console.log('enterprise installation data:', doc.data());
+        console.error('enterprise installation data:', doc.data());
         return doc.data();
       }
       if (installQuery.teamId !== undefined) {
@@ -76,13 +75,54 @@ const app = new App({
         if (!doc.exists) {
           throw new Error(`${installQuery.teamId} doc doesn't exist in DB`);
         }
-        console.log('team installation data:', doc.data());
+        console.error('team installation data:', doc.data());
         return doc.data();
       }
       throw new Error('Failed fetching installation');
     },
   },
 });
+
+const questionBlocks = questions.map(
+  (item) => (
+    {
+      type: 'header',
+      text: {
+        type: 'plain_text',
+        text: item.question,
+        emoji: true,
+      },
+    },
+    {
+      block_id: `${item.key}_block`,
+      type: 'actions',
+      elements: [
+        {
+          type: 'radio_buttons',
+          options: [
+            {
+              text: {
+                type: 'plain_text',
+                text: item.leftOption.text,
+                emoji: true,
+              },
+              value: item.leftOption.value,
+            },
+            {
+              text: {
+                type: 'plain_text',
+                text: item.rightOption.text,
+                emoji: true,
+              },
+              value: item.rightOption.value,
+            },
+          ],
+          action_id: item.key,
+        },
+      ],
+    }
+  )
+);
 
 // All the room in the world for your code
 app.event('app_home_opened', async ({ event, client, context }) => {
@@ -172,7 +212,6 @@ app.event('app_home_opened', async ({ event, client, context }) => {
         ],
       },
     });
-    console.log(result);
   } catch (error) {
     console.error(error);
   }
@@ -209,366 +248,7 @@ app.command('/coboto', async ({ ack, payload, context }) => {
           {
             type: 'divider',
           },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Drink at work?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'drink_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '☕️',
-                      emoji: true,
-                    },
-                    value: 'coffee',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🍵',
-                      emoji: true,
-                    },
-                    value: 'tea',
-                  },
-                ],
-                action_id: 'drink',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Drink after work?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'alcohol_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🍷',
-                      emoji: true,
-                    },
-                    value: 'wine',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🍺',
-                      emoji: true,
-                    },
-                    value: 'beer',
-                  },
-                ],
-                action_id: 'alcohol',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Your winter choice?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'winter_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '⛷',
-                      emoji: true,
-                    },
-                    value: 'ski',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🏂',
-                      emoji: true,
-                    },
-                    value: 'snowboard',
-                  },
-                ],
-                action_id: 'winter',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Your manager is?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'manager_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🦁',
-                      emoji: true,
-                    },
-                    value: 'lion',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🐑',
-                      emoji: true,
-                    },
-                    value: 'sheep',
-                  },
-                ],
-                action_id: 'manager',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Communication style?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'communication_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🐶',
-                      emoji: true,
-                    },
-                    value: 'dog',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '😸',
-                      emoji: true,
-                    },
-                    value: 'cat',
-                  },
-                ],
-                action_id: 'communication',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Working style?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'working_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🏹',
-                      emoji: true,
-                    },
-                    value: 'arrow',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '👩‍🌾',
-                      emoji: true,
-                    },
-                    value: 'farmer',
-                  },
-                ],
-                action_id: 'working',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Your favorite lunch?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'food_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🍔',
-                      emoji: true,
-                    },
-                    value: 'burger',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🍣',
-                      emoji: true,
-                    },
-                    value: 'sushi',
-                  },
-                ],
-                action_id: 'food',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Have fun on holiday?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'place_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '⛰',
-                      emoji: true,
-                    },
-                    value: 'mountain',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🌊',
-                      emoji: true,
-                    },
-                    value: 'sea',
-                  },
-                ],
-                action_id: 'place',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Energy hours?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'energy_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🌞',
-                      emoji: true,
-                    },
-                    value: 'day',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🧛‍♀️',
-                      emoji: true,
-                    },
-                    value: 'night',
-                  },
-                ],
-                action_id: 'energy',
-              },
-            ],
-          },
-          {
-            type: 'header',
-            text: {
-              type: 'plain_text',
-              text: 'Your favorite lunch?',
-              emoji: true,
-            },
-          },
-          {
-            block_id: 'exercise_block',
-            type: 'actions',
-            elements: [
-              {
-                type: 'radio_buttons',
-                options: [
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🏋️‍♂️',
-                      emoji: true,
-                    },
-                    value: 'gym',
-                  },
-                  {
-                    text: {
-                      type: 'plain_text',
-                      text: '🏃‍♀️',
-                      emoji: true,
-                    },
-                    value: 'running',
-                  },
-                ],
-                action_id: 'exercise',
-              },
-            ],
-          },
+          ...questionBlocks,
           {
             block_id: 'channel_block',
             type: 'input',
