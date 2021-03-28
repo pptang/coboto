@@ -4,6 +4,46 @@ const fetch = require('node-fetch');
 
 const admin = require('firebase-admin');
 const questions = require('./questions');
+
+const questionBlocks = questions.flatMap((item) => [
+  {
+    type: 'header',
+    text: {
+      type: 'plain_text',
+      text: item.question,
+      emoji: true,
+    },
+  },
+  {
+    block_id: `${item.key}_block`,
+    type: 'actions',
+    elements: [
+      {
+        type: 'radio_buttons',
+        options: [
+          {
+            text: {
+              type: 'plain_text',
+              text: item.leftOption.text,
+              emoji: true,
+            },
+            value: item.leftOption.value,
+          },
+          {
+            text: {
+              type: 'plain_text',
+              text: item.rightOption.text,
+              emoji: true,
+            },
+            value: item.rightOption.value,
+          },
+        ],
+        action_id: item.key,
+      },
+    ],
+  },
+]);
+
 admin.initializeApp({
   credential: admin.credential.cert(
     // TODO @paipo: fix local env variable configuration for testing
@@ -81,47 +121,6 @@ const app = new App({
     },
   },
 });
-
-const questionBlocks = questions.flatMap(
-  (item) => (
-    {
-      type: 'header',
-      text: {
-        type: 'plain_text',
-        text: item.question,
-        emoji: true,
-      },
-    },
-    {
-      block_id: `${item.key}_block`,
-      type: 'actions',
-      elements: [
-        {
-          type: 'radio_buttons',
-          options: [
-            {
-              text: {
-                type: 'plain_text',
-                text: item.leftOption.text,
-                emoji: true,
-              },
-              value: item.leftOption.value,
-            },
-            {
-              text: {
-                type: 'plain_text',
-                text: item.rightOption.text,
-                emoji: true,
-              },
-              value: item.rightOption.value,
-            },
-          ],
-          action_id: item.key,
-        },
-      ],
-    }
-  )
-);
 
 // All the room in the world for your code
 app.event('app_home_opened', async ({ event, client, context }) => {
