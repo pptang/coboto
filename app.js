@@ -29,6 +29,7 @@ const app = new App({
   scopes: ['chat:write', 'commands'],
   installationStore: {
     storeInstallation: async (installation) => {
+      console.log('storeInstallation:', { installation });
       const oauthRef = db.collection('oauth');
       return await oauthRef
         .doc(
@@ -39,6 +40,7 @@ const app = new App({
         .set({ installation });
     },
     fetchInstallation: async (installQuery) => {
+      console.log('fetchInstallation:', { installQuery });
       // change the line below so it fetches from your database
       const oauthRef = db.collection('oauth');
       if (
@@ -48,7 +50,9 @@ const app = new App({
         // org wide app installation lookup
         const doc = await oauthRef.doc(installQuery.enterpriseId).get();
         if (!doc.exists) {
-          throw new Error('Failed fetching installation');
+          throw new Error(
+            `${installQuery.enterprisedId} doc doesn't exist in DB`
+          );
         }
         return doc.data().installation;
       }
@@ -56,7 +60,7 @@ const app = new App({
         // single team app installation lookup
         const doc = await oauthRef.doc(installQuery.teamId).get();
         if (!doc.exists) {
-          throw new Error('Failed fetching installation');
+          throw new Error(`${installQuery.teamId} doc doesn't exist in DB`);
         }
         return doc.data().installation;
       }
