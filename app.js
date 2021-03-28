@@ -75,7 +75,6 @@ const app = new App({
         if (!doc.exists) {
           throw new Error(`${installQuery.teamId} doc doesn't exist in DB`);
         }
-        console.error('team installation data:', doc.data());
         return doc.data();
       }
       throw new Error('Failed fetching installation');
@@ -221,7 +220,7 @@ app.event('app_home_opened', async ({ event, client, context }) => {
 app.command('/coboto', async ({ ack, payload, context }) => {
   // Acknowledge the command request
   ack();
-
+  console.log({ questions });
   try {
     const result = await app.client.views.open({
       token: context.botToken,
@@ -314,7 +313,6 @@ app.view('view_1', async ({ ack, body, view, context }) => {
       token: context.botToken,
       // Channel to send message to
       channel: channelId,
-      // text: '*Coffee or Tea:* ' + selectOption + '\n\n' + '*Introduction:* ' + intro + '\n\n' + '*Interest:* ' + interest + '\n\n' + '*Fun Fact:* ' + funFact + '\n\n' + '*Social Media:* ' + socialMedia + '\n\n',
       blocks: [
         {
           type: 'section',
