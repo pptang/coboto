@@ -15,32 +15,38 @@ const questionBlocks = questions.flatMap((item) => [
     },
   },
   {
+    type: 'section',
     block_id: `${item.key}_block`,
-    type: 'actions',
-    elements: [
-      {
-        type: 'radio_buttons',
-        options: [
-          {
-            text: {
-              type: 'plain_text',
-              text: item.leftOption.text,
-              emoji: true,
-            },
-            value: item.leftOption.value,
-          },
-          {
-            text: {
-              type: 'plain_text',
-              text: item.rightOption.text,
-              emoji: true,
-            },
-            value: item.rightOption.value,
-          },
-        ],
-        action_id: item.key,
+    accessory: {
+      type: 'radio_buttons',
+      action_id: item.key,
+      initial_option: {
+        text: {
+          type: 'plain_text',
+          text: item.leftOption.text,
+          emoji: true,
+        },
+        value: item.leftOption.value,
       },
-    ],
+      options: [
+        {
+          text: {
+            type: 'plain_text',
+            text: item.leftOption.text,
+            emoji: true,
+          },
+          value: item.leftOption.value,
+        },
+        {
+          text: {
+            type: 'plain_text',
+            text: item.rightOption.text,
+            emoji: true,
+          },
+          value: item.rightOption.value,
+        },
+      ],
+    },
   },
 ]);
 
