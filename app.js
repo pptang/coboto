@@ -54,6 +54,7 @@ const app = new App({
             `${installQuery.enterprisedId} doc doesn't exist in DB`
           );
         }
+        console.log('enterprise installation data:', doc.data());
         return doc.data().installation;
       }
       if (installQuery.teamId !== undefined) {
@@ -62,6 +63,7 @@ const app = new App({
         if (!doc.exists) {
           throw new Error(`${installQuery.teamId} doc doesn't exist in DB`);
         }
+        console.log('team installation data:', doc.data());
         return doc.data().installation;
       }
       throw new Error('Failed fetching installation');
