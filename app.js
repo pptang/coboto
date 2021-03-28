@@ -7,15 +7,11 @@ const questions = require('./questions');
 
 const questionBlocks = questions.flatMap((item) => [
   {
-    type: 'header',
-    text: {
-      type: 'plain_text',
-      text: item.question,
-      emoji: true,
-    },
-  },
-  {
     type: 'section',
+    text: {
+      type: 'mrkdwn',
+      text: item.question,
+    },
     block_id: `${item.key}_block`,
     accessory: {
       type: 'radio_buttons',
