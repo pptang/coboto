@@ -16,6 +16,7 @@ admin.initializeApp({
   }),
 });
 
+// Check doc here: https://firebase.google.com/docs/firestore/query-data/get-data
 const db = admin.firestore();
 
 const app = new App({
