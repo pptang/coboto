@@ -18,6 +18,7 @@ admin.initializeApp({
 
 // Check doc here: https://firebase.google.com/docs/firestore/query-data/get-data
 const db = admin.firestore();
+db.settings({ ignoreUndefinedProperties: true });
 
 const app = new App({
   // token: process.env.SLACK_BOT_TOKEN,
@@ -29,6 +30,24 @@ const app = new App({
   scopes: ['chat:write', 'commands'],
   installationStore: {
     storeInstallation: async (installation) => {
+      // Sample installation:
+      /**
+        * {
+        *   team: { id: 'TBJ0K6T7G', name: 'Japan Insider' },
+            enterprise: undefined,
+            user: { token: undefined, scopes: undefined, id: 'UH3EZK20N' },
+            tokenType: 'bot',
+            isEnterpriseInstall: false,
+            appId: 'A01NFRFTZC1',
+            authVersion: 'v2',
+            bot: {
+              scopes: [Array],
+              token: 'mock_token',
+              userId: 'U01TBDEC048',
+              id: 'B01SMRGUDS7'
+            }
+          }
+       */
       console.log('storeInstallation:', { installation });
       const oauthRef = db.collection('oauth');
       return await oauthRef
@@ -37,7 +56,7 @@ const app = new App({
             ? installation.enterprise.id
             : installation.team.id
         )
-        .set({ installation });
+        .set(installation);
     },
     fetchInstallation: async (installQuery) => {
       console.log('fetchInstallation:', { installQuery });
