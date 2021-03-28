@@ -220,7 +220,7 @@ app.event('app_home_opened', async ({ event, client, context }) => {
 app.command('/coboto', async ({ ack, payload, context }) => {
   // Acknowledge the command request
   ack();
-  console.log({ questions });
+  console.log({ questionBlocks });
   try {
     const result = await app.client.views.open({
       token: context.botToken,
